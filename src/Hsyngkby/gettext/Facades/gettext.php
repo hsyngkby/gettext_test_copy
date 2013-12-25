@@ -9,5 +9,5 @@ class gettext extends Facade
      *
      * @return string
      */
-    protected static function getFacadeAccessor() { return 'l4gettext'; }
+    protected static function getFacadeAccessor() { return 'gettext'; }
 }

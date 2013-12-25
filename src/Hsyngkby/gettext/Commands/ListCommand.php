@@ -14,7 +14,7 @@ class ListCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'l4gettext:list';
+    protected $name = 'gettext:list';
 
     /**
      * The console command description.
@@ -44,8 +44,8 @@ class ListCommand extends Command {
         /**
          * lists
          */
-        $locales = Config::get("l4gettext::locales.list");
-        $encodings = Config::get("l4gettext::encodings.list");
+        $locales = Config::get("gettext::locales.list");
+        $encodings = Config::get("gettext::encodings.list");
 
         /**
          * list locales

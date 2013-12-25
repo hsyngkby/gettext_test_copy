@@ -15,7 +15,7 @@ class CompileCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'l4gettext:compile';
+    protected $name = 'gettext:compile';
 
     /**
      * The console command description.
@@ -120,9 +120,9 @@ class CompileCommand extends Command {
          * set defaults
          */
         $defaults = array(
-            'input_folder'  => Config::get("l4gettext::config.compiler.input_folder"),
-            'output_folder' => Config::get("l4gettext::config.compiler.output_folder"),
-            'levels'        => Config::get("l4gettext::config.compiler.levels"),
+            'input_folder'  => Config::get("gettext::config.compiler.input_folder"),
+            'output_folder' => Config::get("gettext::config.compiler.output_folder"),
+            'levels'        => Config::get("gettext::config.compiler.levels"),
         );
 
         /**

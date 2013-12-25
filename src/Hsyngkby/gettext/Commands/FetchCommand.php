@@ -12,7 +12,7 @@ class FetchCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'l4gettext:fetch';
+    protected $name = 'gettext:fetch';
 
     /**
      * The console command description.
@@ -61,7 +61,7 @@ class FetchCommand extends Command {
         /**
          * check if config has been published
          */
-        $config_path = app_path() . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "packages" . DIRECTORY_SEPARATOR . "hsyngkby" . DIRECTORY_SEPARATOR . "l4gettext";
+        $config_path = app_path() . DIRECTORY_SEPARATOR . "config" . DIRECTORY_SEPARATOR . "packages" . DIRECTORY_SEPARATOR . "hsyngkby" . DIRECTORY_SEPARATOR . "gettext";
         $locales_file = $config_path . DIRECTORY_SEPARATOR . "locales.php";
         $encodings_file = $config_path . DIRECTORY_SEPARATOR . "encodings.php";
         $locales_dist_file = $config_path . DIRECTORY_SEPARATOR . "locales.dist";
@@ -184,7 +184,7 @@ class FetchCommand extends Command {
          */
         $this->info("  done generating config files");
         $this->info("  - automatically detected [" . count($locales) . "] locales and [" . count($encodings) . "] encodings");
-        $this->info("  - use the l4gettext:list command to check the detected locales/encodings");
+        $this->info("  - use the gettext:list command to check the detected locales/encodings");
         $this->info("  - be sure to verify your default settings in the config.php file");
 
     }

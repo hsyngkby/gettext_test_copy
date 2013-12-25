@@ -15,7 +15,7 @@ class ExtractCommand extends Command {
      *
      * @var string
      */
-    protected $name = 'l4gettext:extract';
+    protected $name = 'gettext:extract';
 
     /**
      * The console command description.
@@ -82,7 +82,7 @@ class ExtractCommand extends Command {
               if ($this->confirm("  would you like to run the compiler using the default settings? [y|n]"))
               {
               $this->line(""); // add empty line
-              $this->call('l4gettext:compile'); // call compile command
+              $this->call('gettext:compile'); // call compile command
               // re-check
               $templates = File::glob($input_folder . "*.php");
 
@@ -132,7 +132,7 @@ class ExtractCommand extends Command {
         /**
          * add output folder argument
          */
-        $xgettext_output_file = storage_path() . DIRECTORY_SEPARATOR . $this->option("output_folder") . DIRECTORY_SEPARATOR . Config::get("l4gettext::config.textdomain") . ".pot";
+        $xgettext_output_file = storage_path() . DIRECTORY_SEPARATOR . $this->option("output_folder") . DIRECTORY_SEPARATOR . Config::get("gettext::config.textdomain") . ".pot";
         if ($this->option('output_folder'))
             $xgettext_arguments[] = "--output=" . $xgettext_output_file;
 
@@ -233,24 +233,24 @@ class ExtractCommand extends Command {
         /**
          * set defaults
          */
-        $binary = Config::get("l4gettext::config.xgettext.binary");
+        $binary = Config::get("gettext::config.xgettext.binary");
 
         $defaults = array(
             'binary'           => (isset($binary) == true) ? $binary : "xgettext",
-            'binary_path'      => Config::get("l4gettext::config.xgettext.binary_path"),
-            'language'         => Config::get("l4gettext::config.xgettext.language"),
-            'comments'         => Config::get("l4gettext::config.xgettext.comments"),
-            'force_po'         => Config::get("l4gettext::config.xgettext.force_po"),
-            'input_folder'     => Config::get("l4gettext::config.xgettext.input_folder"),
-            'views_folder'     => Config::get("l4gettext::config.compiler.input_folder"),
-            'output_folder'    => Config::get("l4gettext::config.xgettext.output_folder"),
-            'from_code'        => Config::get("l4gettext::config.xgettext.from_code"),
-            'copyright_holder' => Config::get("l4gettext::config.xgettext.copyright_holder"),
-            'package_name'     => Config::get("l4gettext::config.xgettext.package_name"),
-            'package_version'  => Config::get("l4gettext::config.xgettext.package_version"),
-            'email_address'    => Config::get("l4gettext::config.xgettext.email_address"),
-            'keywords'         => Config::get("l4gettext::config.xgettext.keywords"),
-            'levels'           => Config::get("l4gettext::config.compiler.levels"),
+            'binary_path'      => Config::get("gettext::config.xgettext.binary_path"),
+            'language'         => Config::get("gettext::config.xgettext.language"),
+            'comments'         => Config::get("gettext::config.xgettext.comments"),
+            'force_po'         => Config::get("gettext::config.xgettext.force_po"),
+            'input_folder'     => Config::get("gettext::config.xgettext.input_folder"),
+            'views_folder'     => Config::get("gettext::config.compiler.input_folder"),
+            'output_folder'    => Config::get("gettext::config.xgettext.output_folder"),
+            'from_code'        => Config::get("gettext::config.xgettext.from_code"),
+            'copyright_holder' => Config::get("gettext::config.xgettext.copyright_holder"),
+            'package_name'     => Config::get("gettext::config.xgettext.package_name"),
+            'package_version'  => Config::get("gettext::config.xgettext.package_version"),
+            'email_address'    => Config::get("gettext::config.xgettext.email_address"),
+            'keywords'         => Config::get("gettext::config.xgettext.keywords"),
+            'levels'           => Config::get("gettext::config.compiler.levels"),
         );
 
         /**

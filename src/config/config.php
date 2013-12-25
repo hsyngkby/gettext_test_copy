@@ -23,7 +23,7 @@ return array(
      * the path to your mo files
      * this should be relative to the laravel app/ dir
      * do not add starting ot trailing slashes
-     * l4gettext will automatically attempt to create the proper directory structure
+     * gettext will automatically attempt to create the proper directory structure
      * the default is [locale]
      */
     'path_to_mo'       => 'locale',
@@ -40,9 +40,9 @@ return array(
         /**
          * set the folder where the compiled templates are stored
          * the path is relative to the /app/storage folder and should not contain and leading or trailing spaces
-         * the default is [l4gettext]
+         * the default is [gettext]
          */
-        'output_folder' => 'l4gettext',
+        'output_folder' => 'gettext',
         /**
          * determines the number of subdirectories that will be scanned for blade templates
          * starting from the input_folder directory
@@ -88,15 +88,15 @@ return array(
         /**
          * input folder where php files to be scanned are located
          * the path is relative to the /app folder and should not contain any leading or trailing slashes
-         * the default is [storage/l4gettext]
+         * the default is [storage/gettext]
          */
-        'input_folder'     => 'storage/l4gettext',
+        'input_folder'     => 'storage/gettext',
         /**
          * output folder where the po(t) file will be stored
          * this path is relative to the /app/storage folder and should not contain leading or trailing slashes
-         * the default is [l4gettext]
+         * the default is [gettext]
          */
-        'output_folder'    => 'l4gettext',
+        'output_folder'    => 'gettext',
         /**
          * set the encoding of the files
          * if left empty, ASCII will be used
@@ -134,7 +134,7 @@ return array(
             'ngettext:1,2', // accepts plurals, uses the first and second argument passed to ngettext as a translation string
             'dngettext:2,3', // accepts plurals, used the second and third argument passed to dngettext as a translation string
             'dcngettext:2,3', // accepts plurals, used the second and third argument passed to dcngettext as a translation string
-            '_n:1,2', // a custom l4gettext shorthand for ngettext (supports plurals)
+            '_n:1,2', // a custom gettext shorthand for ngettext (supports plurals)
         ),
     ),
 );

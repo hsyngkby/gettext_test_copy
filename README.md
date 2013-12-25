@@ -17,7 +17,7 @@ Written by: **Rinck Sonnenberg (Hsyngkby)**
 
 ``` $ php composer.phar update ```
 
-* add the l4gettext service provider to the laravel app/config/app.php file, in array key 'provider':
+* add the gettext service provider to the laravel app/config/app.php file, in array key 'provider':
 
 ```php
 <?php
@@ -36,7 +36,7 @@ return array(
 
 Next, automatically detect which locales and encodings are installed by executing the following command:
 
-``` $ php artisan l4gettext:fetch ```
+``` $ php artisan gettext:fetch ```
 
 *NOTE: only available on Linux/MacOS since this uses the ```locale``` command, which is not available on windows systems. This will automatically publish the config files if they haven't been published already.*
 
@@ -84,17 +84,17 @@ See the section on Command line options for more information.
 To get started with this module and gettext, you can follow these basic steps:
 * Follow the installation instructions in this document (see above) to install the module
 
-* Make sure the installation was successful by seeing if the l4gettext commands are available: ```$ php artisan list ```; a section called l4gettext should appear somewhere in the list of commands
+* Make sure the installation was successful by seeing if the gettext commands are available: ```$ php artisan list ```; a section called gettext should appear somewhere in the list of commands
 
-* Then, create (and publish) the config files using the fetch command:  ```$ php artisan l4gettext:fetch ``` (this command is only supported on Linux/UNIX/Mac based systems and won't work on Windows)
+* Then, create (and publish) the config files using the fetch command:  ```$ php artisan gettext:fetch ``` (this command is only supported on Linux/UNIX/Mac based systems and won't work on Windows)
 
-* To check which locales and encodings were detected on your system, execute the following command: ```$ php artisan l4gettext:list ```
+* To check which locales and encodings were detected on your system, execute the following command: ```$ php artisan gettext:list ```
 
 * Next, create your laravel blade templates as you normally would, but now putting all translatable text in the proper gettext function. For example:  ```{{ _("Hello World!") }}``` - see the section *How does it work?* in this document for more information
 
-* When you're done creating your templates, you need to compile them so that the translatable strings can be extracted. To compile your templates, execute the following command: ```$ php artisan l4gettext:compile```
+* When you're done creating your templates, you need to compile them so that the translatable strings can be extracted. To compile your templates, execute the following command: ```$ php artisan gettext:compile```
 
-* Next, you need to extract all the translatable strings from the compiled templates and view folders into a .POT file; do so by executing the following command: ```$ php artisan l4gettext:extract```
+* Next, you need to extract all the translatable strings from the compiled templates and view folders into a .POT file; do so by executing the following command: ```$ php artisan gettext:extract```
 
 * Use POEdit to translate the .POT file and use it to create your .mo file. The more recent versions of POEdit will automatically compile the .mo file for you when you save your translations. - *See the important note under* **Command line options** *in case you're updating an existing translation!*
 
@@ -118,18 +118,18 @@ Aside from some of the laravel 4 components, there are only logical dependencies
 
 There are 4 artisan commands for this package:
 
-* **l4gettext:compile**: compiles all blade template files to a specific folder (not the default cache folder)
-* **l4gettext:extract**: extracts all the language strings from the compiled templates and views folder
-* **l4gettext:list**: lists the locales/encodings supported by the application (not the system locales) and prints the default settings
-* **l4gettext:fetch**: auto generates the locales.php and encodings.php config files with the locales and encodings installed on your OS; in case the config files have not been published yet, this command will do so first
+* **gettext:compile**: compiles all blade template files to a specific folder (not the default cache folder)
+* **gettext:extract**: extracts all the language strings from the compiled templates and views folder
+* **gettext:list**: lists the locales/encodings supported by the application (not the system locales) and prints the default settings
+* **gettext:fetch**: auto generates the locales.php and encodings.php config files with the locales and encodings installed on your OS; in case the config files have not been published yet, this command will do so first
 
 These commands use the options as set in the config file, but most can be overwritten at runtime by providing the appropriate parameters on the CLI. Check out the help for these commands for more info:
 
-``` $ php artisan l4gettext:compile -h ```
+``` $ php artisan gettext:compile -h ```
 
-``` $ php artisan l4gettext:extract --help ```
+``` $ php artisan gettext:extract --help ```
 
-**NOTE**: *Running the l4gettext:extract command extracts all language messages from compiled templates AND php files in the views folder.*
+**NOTE**: *Running the gettext:extract command extracts all language messages from compiled templates AND php files in the views folder.*
 
 The extract command creates a .pot file in the output directory if translatable strings are found. Please use the POEdit tool (link at bottom) to open this file.
 Once you enter your translation string(s) in poedit, hit the save button. This will automatically generate the compiled/indexed version of the translation file .mo.
@@ -137,7 +137,7 @@ Place this compiled .mo file in the appropriate locale folder (ex: app/locale/en
 Note that gettext is extremely finicky when it comes to folder conventions!
 
 **IMPORTANT**:
-*Every time you run the extract command, a brand new .pot file is generated in the storage/l4gettext folder. So, if you already
+*Every time you run the extract command, a brand new .pot file is generated in the storage/gettext folder. So, if you already
 have translations entered for a few of the strings, DO NOT run extract again as this will create a fresh .pot file overwriting
 your edits.
 POEdit makes managing your .pot files very easy. For updating your pot file (in case you made last minute additions/changes to your templates), enter the paths to BOTH

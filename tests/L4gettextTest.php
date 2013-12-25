@@ -34,41 +34,41 @@ class gettextTest extends Orchestra\Testbench\TestCase {
 
     public function testSetLocaleReturnsInstanceOfgettext ()
     {
-        $default = Config::get('l4gettext::config.default_locale');
+        $default = Config::get('gettext::config.default_locale');
         $this->assertInstanceOf('Hsyngkby\gettext\gettext', gettext::setLocale($default));
 
     }
 
     public function testSessionHasLocale ()
     {
-        $this->assertTrue(Session::has('l4gettext_locale'));
+        $this->assertTrue(Session::has('gettext_locale'));
 
     }
 
     public function testSessionHasDefaultLocale ()
     {
-        $default = Config::get('l4gettext::config.default_locale');
-        $this->assertSame(Session::get('l4gettext_locale'), $default);
+        $default = Config::get('gettext::config.default_locale');
+        $this->assertSame(Session::get('gettext_locale'), $default);
 
     }
 
     public function testSetEncodingReturnsInstanceOfgettext ()
     {
-        $default = Config::get('l4gettext::config.default_encoding');
+        $default = Config::get('gettext::config.default_encoding');
         $this->assertInstanceOf('Hsyngkby\gettext\gettext', gettext::setEncoding($default));
 
     }
 
     public function testSessionHasEncoding ()
     {
-        $this->assertTrue(Session::has('l4gettext_encoding'));
+        $this->assertTrue(Session::has('gettext_encoding'));
 
     }
 
     public function testSessionHasDefaultEncoding ()
     {
-        $default = Config::get('l4gettext::config.default_encoding');
-        $this->assertSame(Session::get('l4gettext_encoding'), $default);
+        $default = Config::get('gettext::config.default_encoding');
+        $this->assertSame(Session::get('gettext_encoding'), $default);
 
     }
 
@@ -94,14 +94,14 @@ class gettextTest extends Orchestra\Testbench\TestCase {
 
     public function testGetLocaleReturnsDefaultLocale ()
     {
-        $default = Config::get('l4gettext::config.default_locale');
+        $default = Config::get('gettext::config.default_locale');
         $this->assertSame(gettext::getLocale(), $default);
 
     }
 
     public function testGetEncodingReturnsDefaultEncoding ()
     {
-        $default = Config::get('l4gettext::config.default_encoding');
+        $default = Config::get('gettext::config.default_encoding');
         $this->assertSame(gettext::getEncoding(), $default);
 
     }
@@ -171,8 +171,8 @@ class gettextTest extends Orchestra\Testbench\TestCase {
 
     public function testSetTextDomainReturnsgettextInstance ()
     {
-        $textdomain = Config::get('l4gettext::config.textdomain');
-        $path_to_mo = Config::get('l4gettext::config.path_to_mo');
+        $textdomain = Config::get('gettext::config.textdomain');
+        $path_to_mo = Config::get('gettext::config.path_to_mo');
         $this->assertInstanceOf('Hsyngkby\gettext\gettext', gettext::setTextDomain($textdomain, $path_to_mo));
 
     }

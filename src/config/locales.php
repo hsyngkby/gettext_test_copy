@@ -12,7 +12,7 @@
  * ones that you actually support in your application
  *
  * this file can be auto-generated using the following artisan command, which will also automatically publish the config file:
- * # php artisan l4gettext:fetch
+ * # php artisan gettext:fetch
  */
 return array(
     "list" => array(

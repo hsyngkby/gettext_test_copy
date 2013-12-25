@@ -30,27 +30,27 @@ class gettext {
     {
         // check if a locale is present in the session
         // otherwise use default
-        if(Config::get('l4gettext::config.gettext_type') === 'gettext'):
-            $session_locale = Session::get('l4gettext_locale', null);
-            $locale = (is_null($session_locale)) ? Config::get("l4gettext::config.default_locale") : $session_locale;
-            Session::forget('l4gettext_locale');
+        if(Config::get('gettext::config.gettext_type') === 'gettext'):
+            $session_locale = Session::get('gettext_locale', null);
+            $locale = (is_null($session_locale)) ? Config::get("gettext::config.default_locale") : $session_locale;
+            Session::forget('gettext_locale');
 
             // check if an encoding is present in the session
-            $session_encoding = Session::get('l4gettext_encoding', null);
-            $encoding = (is_null($session_encoding)) ? Config::get("l4gettext::config.default_encoding") : $session_encoding;
-            Session::forget('l4gettext_encoding');
+            $session_encoding = Session::get('gettext_encoding', null);
+            $encoding = (is_null($session_encoding)) ? Config::get("gettext::config.default_encoding") : $session_encoding;
+            Session::forget('gettext_encoding');
 
             // set the encoding and locale
             $this->setEncoding($encoding)->setLocale($locale);
 
             // determine and set textdomain
-            $textdomain = Config::get("l4gettext::config.textdomain");
-            $path = Config::get("l4gettext::config.path_to_mo");
+            $textdomain = Config::get("gettext::config.textdomain");
+            $path = Config::get("gettext::config.path_to_mo");
             $this->setTextDomain($textdomain, $path);
         endif;
-        if(Config::get('l4gettext::config.gettext_type') === 'php'):
+        if(Config::get('gettext::config.gettext_type') === 'php'):
             $session_locale = Session::get('user.lang', null);
-            $locale = (is_null($session_locale)) ? Config::get("l4gettext::config.default_locale") : $session_locale;
+            $locale = (is_null($session_locale)) ? Config::get("gettext::config.default_locale") : $session_locale;
             Session::put('user.lang', $locale);
         endif;
     }
@@ -65,7 +65,7 @@ class gettext {
     public function setEncoding ($encoding)
     {
         // fetch encodings list
-        $encodings = Config::get('l4gettext::encodings.list');
+        $encodings = Config::get('gettext::encodings.list');
 
         // sanity check
         if (!in_array($encoding, $encodings))
@@ -75,7 +75,7 @@ class gettext {
         $this->encoding = $encoding;
 
         // save locale to session
-        Session::put('l4gettext_encoding', $this->encoding);
+        Session::put('gettext_encoding', $this->encoding);
 
         // return - allow object chaining
         return $this;
@@ -91,7 +91,7 @@ class gettext {
     public function setLocale ($locale)
     {
         // fetch locales list
-        $locales = Config::get('l4gettext::locales.list');
+        $locales = Config::get('gettext::locales.list');
 
         // sanity check
         if (!in_array($locale, $locales))
@@ -115,7 +115,7 @@ class gettext {
             throw new LocaleNotFoundException("The given locale [$localecodeset] could not be set; it seems it does not exist on this system");
 
         // save locale to session
-        Session::put('l4gettext_locale', $this->locale);
+        Session::put('gettext_locale', $this->locale);
 
         // return - allow object chaining
         return $this;

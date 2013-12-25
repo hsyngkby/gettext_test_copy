@@ -45,7 +45,7 @@ class gettextServiceProvider extends ServiceProvider {
      */
     public function register ()
     {
-        // register l4gettext and alias
+        // register gettext and alias
         $this->registergettext();
 
         // register blade compiler
@@ -62,7 +62,7 @@ class gettextServiceProvider extends ServiceProvider {
     public function registergettext ()
     {
         // register gettext
-        $this->app['l4gettext'] = $this->app->share(function($app) {
+        $this->app['gettext'] = $this->app->share(function($app) {
                     return new gettext();
                 });
 
@@ -92,40 +92,40 @@ class gettextServiceProvider extends ServiceProvider {
     public function registerCompileCommand ()
     {
         // add compile command to artisan
-        $this->app['l4gettext.compile'] = $this->app->share(function($app) {
+        $this->app['gettext.compile'] = $this->app->share(function($app) {
                     return new Commands\CompileCommand();
                 });
-        $this->commands('l4gettext.compile');
+        $this->commands('gettext.compile');
 
     }
 
     public function registerExtractCommand ()
     {
         // add extract command to artisan
-        $this->app['l4gettext.extract'] = $this->app->share(function($app) {
+        $this->app['gettext.extract'] = $this->app->share(function($app) {
                     return new Commands\ExtractCommand(new ProcessBuilder);
                 });
-        $this->commands('l4gettext.extract');
+        $this->commands('gettext.extract');
 
     }
 
     public function registerListCommand ()
     {
         // add list command to artisan
-        $this->app['l4gettext.list'] = $this->app->share(function($app) {
+        $this->app['gettext.list'] = $this->app->share(function($app) {
                     return new Commands\ListCommand();
                 });
-        $this->commands('l4gettext.list');
+        $this->commands('gettext.list');
 
     }
 
     public function registerFetchCommand ()
     {
         // add fetch command to artisan
-        $this->app['l4gettext.fetch'] = $this->app->share(function($app) {
+        $this->app['gettext.fetch'] = $this->app->share(function($app) {
                     return new Commands\FetchCommand(new ProcessBuilder);
                 });
-        $this->commands('l4gettext.fetch');
+        $this->commands('gettext.fetch');
 
     }
 
