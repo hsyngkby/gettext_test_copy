@@ -75,10 +75,13 @@ class gettext {
             $file = Config::get('gettext::config.path_to_pot');
         $file = str_replace('{locale}', $locale, $file);
         $file = str_replace('{textdomain}', $textdomain , $file);
-        $file = new \File_Gettext_PO($file);
-        $q1 = $file->load();
-        $q2 = $file->toArray();
-        $GLOBALS['XO_LANG'] = $q2['strings'];
+        $GLOBALS['XO_LANG'] = array();
+        if (file_exists($file)){
+            $file = new \File_Gettext_PO($file);
+            $q1 = $file->load();
+            $q2 = $file->toArray();
+            $GLOBALS['XO_LANG'] = $q2['strings'];
+        }
     }
 
     /**

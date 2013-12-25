@@ -39,6 +39,7 @@ return array(
         'views_folder        ' => '',
         'keywords'             => array(
             '__', // shorthand for gettext
+            '___', // shorthand for gettext
             //'gettext', // the default php gettext function
             //'dgettext:2', // accepts plurals, uses the second argument passed to dgettext as a translation string
             //'dcgettext:2', // accepts plurals, uses the second argument passed to dcgettext as a translation string
