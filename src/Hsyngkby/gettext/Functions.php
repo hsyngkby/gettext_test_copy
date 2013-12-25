@@ -31,7 +31,7 @@ function getGlobPattern($levels)
     return $pattern;
 }
 
-function _($msg = '',$prefix = ''){
+function xo_gettext($msg = '',$prefix = ''){
     $template = "{code}{msg}{/code}";
     $code = "code";
     if (trim($msg) === '') return '';
