@@ -53,4 +53,5 @@ function __($msg = '',$prefix = ''){
     return str_replace(array("{code}","{msg}","{/code}"), array("<".$code.">",$result,"</$code>"), $template);
 }
 
+
 ?>
