@@ -31,4 +31,26 @@ function getGlobPattern($levels)
     return $pattern;
 }
 
+function __($msg = '',$prefix = ''){
+    $template = "{code}{msg}{/code}";
+    $code = "code";
+    if (trim($msg) === '') return '';
+    if ($prefix === ''){
+        if (isset($GLOBALS['XO_LANG'][$msg])){
+            $result = $GLOBALS['XO_LANG'][$msg];
+            $code = "xo_t";
+            if ($result == ''){
+                $result = "_".$msg."_";
+                $code = "xo_n";
+            }
+        }else{
+            $result = "$msg";
+            $code = "xo_f";
+        }
+    }else{
+        dd('prefix yapılacak daha');
+    }
+    return str_replace(array("{code}","{msg}","{/code}"), array("<".$code.">",$result,"</$code>"), $template);
+}
+
 ?>

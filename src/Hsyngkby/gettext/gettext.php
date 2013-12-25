@@ -30,6 +30,7 @@ class gettext {
     {
         // check if a locale is present in the session
         // otherwise use default
+        /*
         if(Config::get('gettext::config.gettext_type') === 'gettext'):
             $session_locale = Session::get('gettext_locale', null);
             $locale = (is_null($session_locale)) ? Config::get("gettext::config.default_locale") : $session_locale;
@@ -48,184 +49,36 @@ class gettext {
             $path = Config::get("gettext::config.path_to_mo");
             $this->setTextDomain($textdomain, $path);
         endif;
-        if(Config::get('gettext::config.gettext_type') === 'php'):
-            $session_locale = Session::get('user.lang', null);
-            $locale = (is_null($session_locale)) ? Config::get("gettext::config.default_locale") : $session_locale;
-            Session::put('user.lang', $locale);
-        endif;
-    }
+        */
+        $session_locale = Session::get('user.lang', null);
+        $locale = (is_null($session_locale)) ? Config::get("gettext::config.default_locale") : $session_locale;
+        Session::put('user.lang', $locale);
+        DEFINE('LOCALE',$locale);
 
-    /**
-     * method to set the encoding
-     *
-     * @param string $encoding
-     * @return \Hsyngkby\gettext\gettext
-     * @throws InvalidEncodingException
-     */
-    public function setEncoding ($encoding)
-    {
-        // fetch encodings list
-        $encodings = Config::get('gettext::encodings.list');
-
-        // sanity check
-        if (!in_array($encoding, $encodings))
-            throw new InvalidEncodingException("The provided encoding [$encoding] does not exist in the list of valid encodings [config/encodings.php]");
-
-        // set encoding, transform to uniform syntax
-        $this->encoding = $encoding;
-
-        // save locale to session
-        Session::put('gettext_encoding', $this->encoding);
-
-        // return - allow object chaining
-        return $this;
-    }
-
-    /**
-     * method to set the locale
-     *
-     * @param string $locale
-     * @return \Hsyngkby\gettext\gettext
-     * @throws InvalidLocaleException
-     */
-    public function setLocale ($locale)
-    {
-        // fetch locales list
-        $locales = Config::get('gettext::locales.list');
-
-        // sanity check
-        if (!in_array($locale, $locales))
-            throw new InvalidLocaleException("The provided locale [$locale] does not exist in the list of valid locales [config/locales.php]");
-
-        // set locale in class
-        $this->locale = $locale;
-
-        // get localecodeset
-        $localecodeset = $this->getLocaleAndEncoding();
-
-        // set environment variable
-        if (!putenv('LC_ALL=' . $localecodeset))
-            throw new EnvironmentNotSetException("The given locale [$localecodeset] could not be set as environment [LC_ALL] variable; it seems it does not exist on this system");
-
-        if (!putenv('LANG=' . $localecodeset))
-            throw new EnvironmentNotSetException("The given locale [$localecodeset] could not be set as environment [LANG] variable; it seems it does not exist on this system");
-
-        // set locale
-        if (!setlocale(LC_ALL, $localecodeset))
-            throw new LocaleNotFoundException("The given locale [$localecodeset] could not be set; it seems it does not exist on this system");
-
-        // save locale to session
-        Session::put('gettext_locale', $this->locale);
-
-        // return - allow object chaining
-        return $this;
+        $this->loadGettextLib($locale);
 
     }
 
-    /**
-     * method to merge the locale and encoding into a single string
-     *
-     * @return string
-     */
-    public function getLocaleAndEncoding ()
+
+    public function loadGettextLib($locale)
     {
-        // windows compatibility - use only the locale, not the encoding
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN')
-            return $this->getLocale();
-        else
-            return $this->getLocale() . "." . $this->getEncoding();
+        require_once 'lib/Gettext.php';
+        require_once 'lib/MO.php';
+        require_once 'lib/PO.php';
 
-    }
-
-    /**
-     * method to fetch the set encoding
-     *
-     * @return string
-     * @throws EncodingNotSetException
-     */
-    public function getEncoding ()
-    {
-        // sanity check
-        if (!$this->hasEncoding())
-            throw new EncodingNotSetException("The encoding needs to be set before calling gettext::getEncoding()");
-
-        // return encoding
-        return $this->encoding;
-
-    }
-
-    /**
-     * method to fetch the set locale
-     *
-     * @return string
-     * @throws LocaleNotSetException
-     */
-    public function getLocale ()
-    {
-        // sanity check
-        if (!$this->hasLocale())
-            throw new LocaleNotSetException("The locale needs to be set before calling gettext::getLocale()");
-
-        // return locale
-        return $this->locale;
-
-    }
-
-    /**
-     * method to check if an encoding has been set
-     *
-     * @return boolean
-     */
-    public function hasEncoding ()
-    {
-        // check if encoding has been set
-        if (isset($this->encoding) && !is_null($this->encoding))
-            return true;
-        else
-            return false;
-
-    }
-
-    /**
-     * method to check if a locale has been set
-     *
-     * @return boolean
-     */
-    public function hasLocale ()
-    {
-        // check if locale has been set
-        if (isset($this->locale) && !is_null($this->locale))
-            return true;
-        else
-            return false;
-
-    }
-
-    /**
-     * method to set the text domain
-     *
-     * @param string $textdomain
-     * @param string $path
-     * @return \Hsyngkby\gettext\gettext
-     */
-    public function setTextDomain ($textdomain, $path)
-    {
-        // full path to localization messages
-        $full_path = app_path() . DIRECTORY_SEPARATOR . $path;
-
-        // sanity check - path must exist relative to app/ folder
-        if (!File::isDirectory($full_path))
-            $this->createFolder($path);
-
-        // bind text domain
-        bindtextdomain($textdomain, $full_path);
-
-        // set text domain
-        textdomain($textdomain);
-
-        // allow object chaining
-        return $this;
-
+        $textdomain = Config::get("gettext::config.textdomain");
+        if (Config::get('gettext::config.lang_type') === 'mo')
+            $file = Config::get('gettext::config.path_to_mo');
+        if (Config::get('gettext::config.lang_type') === 'po')
+            $file = Config::get('gettext::config.path_to_po');
+        if (Config::get('gettext::config.lang_type') === 'pot')
+            $file = Config::get('gettext::config.path_to_pot');
+        $file = str_replace('{locale}', $locale, $file);
+        $file = str_replace('{textdomain}', $textdomain , $file);
+        $file = new \File_Gettext_PO($file);
+        $q1 = $file->load();
+        $q2 = $file->toArray();
+        $GLOBALS['XO_LANG'] = $q2['strings'];
     }
 
     /**

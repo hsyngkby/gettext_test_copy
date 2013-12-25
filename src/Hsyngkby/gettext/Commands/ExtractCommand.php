@@ -132,7 +132,7 @@ class ExtractCommand extends Command {
         /**
          * add output folder argument
          */
-        $xgettext_output_file = storage_path() . DIRECTORY_SEPARATOR . $this->option("output_folder") . DIRECTORY_SEPARATOR . Config::get("gettext::config.textdomain") . ".pot";
+        $xgettext_output_file = $this->option("output_folder") . DIRECTORY_SEPARATOR . Config::get("gettext::config.textdomain") . ".pot";
         if ($this->option('output_folder'))
             $xgettext_arguments[] = "--output=" . $xgettext_output_file;
 

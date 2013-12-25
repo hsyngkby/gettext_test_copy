@@ -1,32 +1,12 @@
 <?php
-/**
- * if you wish to alter this configuration file, make sure you issue the publish command and change the published version:
- * # php artisan config:publish hsyngkby/gettext
- */
+
 return array(
-    /**
-     * set the preferred default locale according to [2letterlanguagecode_2LETTERCOUNTRYCODE]
-     * the default is [en_US]
-     */
+
     'default_locale'   => 'en_US',
-    /**
-     * set preferred default encoding
-     * the default is [utf8]
-     */
-    'default_encoding' => 'utf8',
-    /**
-     * determines the text domain; this should be unique for each application
-     * the default is [messages]
-     */
-    'textdomain'       => 'messages',
-    /**
-     * the path to your mo files
-     * this should be relative to the laravel app/ dir
-     * do not add starting ot trailing slashes
-     * gettext will automatically attempt to create the proper directory structure
-     * the default is [locale]
-     */
-    'path_to_mo'       => 'locale',
+    'path_to_mo'       => base_path().'/language/{locale}/LC_MESSAGES/xo.mo',
+    'path_to_po'       => base_path().'/language/{locale}/LC_MESSAGES/xo.po',
+    'lang_type'        => 'po', // po   mo
+
     /**
      * compiler settings
      */
@@ -96,7 +76,7 @@ return array(
          * this path is relative to the /app/storage folder and should not contain leading or trailing slashes
          * the default is [gettext]
          */
-        'output_folder'    => 'gettext',
+        'output_folder'    => storage_path().'/gettext',
         /**
          * set the encoding of the files
          * if left empty, ASCII will be used
@@ -119,7 +99,7 @@ return array(
         /**
          * the email address that will be included in the .po(t) file
          */
-        'email_address'    => 'r.sonnenberg@hsyngkby.nl',
+        'email_address'    => 'huseyingokbay@gmail.com',
         /**
          * specify the keywords used to scan the source files for strings
          * you can add your own shorthand/alternative keywords here which will then be scanned by xgettext
@@ -127,14 +107,15 @@ return array(
          * the defaults are [_, gettext, dgettext:2, dcgettext:2, ngettext:1,2, dngettext:2,3, dcngettext:2,3, _n:1,2]
          */
         'keywords'         => array(
-            '_', // shorthand for gettext
-            'gettext', // the default php gettext function
-            'dgettext:2', // accepts plurals, uses the second argument passed to dgettext as a translation string
-            'dcgettext:2', // accepts plurals, uses the second argument passed to dcgettext as a translation string
-            'ngettext:1,2', // accepts plurals, uses the first and second argument passed to ngettext as a translation string
-            'dngettext:2,3', // accepts plurals, used the second and third argument passed to dngettext as a translation string
-            'dcngettext:2,3', // accepts plurals, used the second and third argument passed to dcngettext as a translation string
-            '_n:1,2', // a custom gettext shorthand for ngettext (supports plurals)
+            '__', // shorthand for gettext
+            //'_', // shorthand for gettext
+            //'gettext', // the default php gettext function
+            //'dgettext:2', // accepts plurals, uses the second argument passed to dgettext as a translation string
+            //'dcgettext:2', // accepts plurals, uses the second argument passed to dcgettext as a translation string
+            //'ngettext:1,2', // accepts plurals, uses the first and second argument passed to ngettext as a translation string
+            //'dngettext:2,3', // accepts plurals, used the second and third argument passed to dngettext as a translation string
+            //'dcngettext:2,3', // accepts plurals, used the second and third argument passed to dcngettext as a translation string
+            //'_n:1,2', // a custom gettext shorthand for ngettext (supports plurals)
         ),
     ),
 );
