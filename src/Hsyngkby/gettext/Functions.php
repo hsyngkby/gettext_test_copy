@@ -31,7 +31,7 @@ function getGlobPattern($levels)
     return $pattern;
 }
 
-function __($msg = '',$prefix = ''){
+function _($msg = '',$prefix = ''){
     $template = "{code}{msg}{/code}";
     $code = "code";
     if (trim($msg) === '') return '';
